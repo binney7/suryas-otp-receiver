@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <html>
 <body>
+
 <h1>Surya's OTP Receiver</h1>
-<p>Website is working!</p>
+
+<input id="otp" placeholder="Enter OTP">
+<button onclick="check()">Submit</button>
+
+<p id="result"></p>
+
+<script>
+function check() {
+  if (document.getElementById("otp").value === "5839") {
+    document.getElementById("result").innerText = "Welcome!";
+  } else {
+    document.getElementById("result").innerText = "Wrong OTP";
+  }
+}
+</script>
+
 </body>
 </html>
