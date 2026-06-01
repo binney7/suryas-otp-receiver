@@ -1,22 +1,101 @@
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>Surya's OTP Receiver</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    text-align:center;
+    padding:30px;
+}
+
+input{
+    padding:10px;
+    margin:5px;
+    width:250px;
+}
+
+button{
+    padding:10px 20px;
+    margin:5px;
+    cursor:pointer;
+}
+
+#result{
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+</style>
+</head>
+
 <body>
 
-<h1>Surya's OTP Receiver</h1>
+<h1>🔐 Surya's OTP Receiver</h1>
 
-<input id="otp" placeholder="Enter OTP">
-<button onclick="check()">Submit</button>
+<h2>Create OTP</h2>
+
+<input id="message" placeholder="Enter secret message">
+
+<br>
+
+<button onclick="createOTP()">Generate OTP</button>
+
+<p id="otpDisplay"></p>
+
+<hr>
+
+<h2>Enter OTP</h2>
+
+<input id="otpInput" placeholder="Enter OTP">
+
+<br>
+
+<button onclick="checkOTP()">Submit</button>
 
 <p id="result"></p>
 
 <script>
-function check() {
-  if (document.getElementById("otp").value === "5839") {
-    document.getElementById("result").innerText = "Welcome!";
-  } else {
-    document.getElementById("result").innerText = "Wrong OTP";
-  }
+
+const otpDatabase = {};
+
+function createOTP(){
+
+    const message =
+        document.getElementById("message").value;
+
+    if(message === ""){
+        alert("Enter a message first");
+        return;
+    }
+
+    const otp =
+        Math.floor(1000 + Math.random() * 9000)
+        .toString();
+
+    otpDatabase[otp] = message;
+
+    document.getElementById("otpDisplay").innerText =
+        "Generated OTP: " + otp;
 }
+
+function checkOTP(){
+
+    const otp =
+        document.getElementById("otpInput").value;
+
+    if(otpDatabase[otp]){
+        document.getElementById("result").innerText =
+            otpDatabase[otp];
+    }
+    else{
+        document.getElementById("result").innerText =
+            "Wrong OTP";
+    }
+}
+
 </script>
 
 </body>
